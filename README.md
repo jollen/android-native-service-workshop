@@ -1,4 +1,4 @@
-## 如何設計與實作 Android Native Service
+## 實作 Android Native Service
 
 ## Step 1: Use BnInterface template
 
@@ -37,7 +37,18 @@ private:
 
 ## Step 4: Define APIs
 
-* 使用 *instantiate()* 取得 instance (singleton pattern)
+* 定義 API
+
+```
+class ILedService: public IInterface
+{
+    int setOn(int led);
+    int setOff(int led);
+};
+```
+
+* 使用 virtual function
+* 透過 *instantiate()* 取得 instance (singleton pattern)
 
 ```
 class LedService: public BnLedService
@@ -52,6 +63,47 @@ private:
     virtual ~LedService();
 };
 ```
+
+## Step 5: 實作 methods 原型
+
+* 實作 instantiate() 與 constructor
+
+```
+LedService::LedService()
+{
+}
+
+// Singleton
+void LedService::instantiate() {
+     defaultServiceManager()->addService(
+             String16("led"), new LedService());
+}
+```
+
+## Step 6: Declare asInterface() 與其它
+
+* 使用 DECLARE_META_INTERFACE 巨集
+
+```
+class ILedService: public IInterface
+{
+public:
+    DECLARE_META_INTERFACE(LedService);
+
+    int setOn(int led);
+    int setOff(int led);
+};
+```
+
+## Step 7: Implement asInterface() 與其它
+
+* 使用 IMPLEMENT_META_INTERFACE 巨集
+
+```
+IMPLEMENT_META_INTERFACE(LedService, "mokoid.hardware.ILedService");
+```
+
+## Step 8: 使用 BpInterface
 
 
 
