@@ -132,5 +132,17 @@ public:
 
 ## Step 9: 實作 ILedService
 
+* 實作 APIs
 
+```
+int LedService::setOn(int led)
+{
+    return 0;
+}
+
+int LedService::setOff(int led)
+{
+    return 0;
+}
+```
 
