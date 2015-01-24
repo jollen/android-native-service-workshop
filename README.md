@@ -64,12 +64,18 @@ private:
 };
 ```
 
-## Step 5: 實作 methods 原型
+## Step 5: 實作 LedService 原型
 
-* 實作 instantiate() 與 constructor
+* 實作 instantiate() 與 singleton patter
+* constructor 實作
+* destructor 實作
 
 ```
 LedService::LedService()
+{
+}
+
+LedService::~LedService()
 {
 }
 
@@ -145,4 +151,6 @@ int LedService::setOff(int led)
     return 0;
 }
 ```
+
+## Step 10: 實作 Binder Transaction
 
