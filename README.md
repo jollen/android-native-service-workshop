@@ -105,7 +105,32 @@ IMPLEMENT_META_INTERFACE(LedService, "mokoid.hardware.ILedService");
 
 ## Step 8: 使用 BpInterface
 
+* 定義 binder proxy
+* 實作 virtual function
 
+```
+class BpLedService: public BpInterface<ILedService>
+{
+public:
+    BpLedService(const sp<IBinder>& impl)
+        : BpInterface<ILedService>(impl)
+    {
+    }
+
+    virtual int setOn(int led)
+    {
+        return 0;
+    }
+
+    virtual int setOff(int led)
+    {
+        return 0;
+    }
+
+};
+```
+
+## Step 9: 實作 ILedService
 
 
 
